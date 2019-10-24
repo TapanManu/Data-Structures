@@ -21,6 +21,10 @@ void display(int stack[],int top[],int i,int min[],int max[])
 {
 	int j;
 	printf("the stack displayed is %d\n",i+1);
+	if(top[i]==min[i])
+	{
+		printf("stack is empty\n");
+	}	
 	for(j=top[i];j>min[i];j--)
 	{
 		printf("	%d\n",stack[j]);
