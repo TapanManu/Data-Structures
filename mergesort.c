@@ -1,38 +1,46 @@
 #include<stdio.h>
+void merge(int a[],int l,int mid,int r)
+{
+	int c[25];
+	int i=l,j=mid+1,k=l;
+	while(i<=mid && j<=r)  
+	{
+		if(a[i]<=a[j])
+				c[k++]=a[i++];	
+		else
+			c[k++]=a[j++];
+	}
+	while(i<=mid)
+		c[k++]=a[i++];
+	while(j<=r)
+		c[k++]=a[j++];
+	for(i=l;i<k;i++)
+		a[i]=c[i];
+}
+void mergesort(int a[],int l,int r)
+{
+	int mid;
+	if(l<r)
+	{
+		mid=(l+r)/2;
+		mergesort(a,l,mid);
+		mergesort(a,mid+1,r);
+		merge(a,l,mid,r);
+	}
+}
 void main()
 {
-int a[50],b[50],c[100],m,n,i,j,k;
-printf("enter the two array size\n");
-scanf("%d %d",&m,&n);
-
-printf("enter the first sorted array:\n");
-for(i=0;i<m;i++)
-{
-	scanf("%d",&a[i]);
+	int i,size,arr[25];
+	printf("enter the size\n");
+	scanf("%d",&size);
+	printf("enter the array\n");
+	for(i=0;i<size;i++)
+		scanf("%d",&arr[i]);
+	printf("unsorted array\n");
+	for(i=0;i<size;i++)
+		printf("%d\t",arr[i]);
+	mergesort(arr,0,size-1);
+	printf("\nsorted array\n");
+	for(i=0;i<size;i++)
+		printf("%d\t",arr[i]);
 }
-
-printf("enter the second sorted array:\n");
-for(j=0;j<n;j++)
-{
-	scanf("%d",&b[j]);
-}
-
-for(i=0,j=0,k=0;k<(m+n);k++)
-{
-if(a[i]<b[j])
-		c[k]=a[i++];
-else
-		c[k]=b[j++];
-
-}
-
-for(k=0;k<(m+n);k++)
-{
-		printf("%d\t",c[k]);
-}
-
-}
-
-
-
-
